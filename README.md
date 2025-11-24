@@ -1,16 +1,29 @@
-# flutter_note
+#  Flutter Note App – Handson Day 14 (Firestore Integration)
 
-A new Flutter project.
+Project ini merupakan lanjutan dari **Handson Day 13 – Local Storage SQLite**, dimana pada **Handson Day 14** dilakukan pengembangan dengan mengintegrasikan **Firebase Firestore** untuk penyimpanan data cloud.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Fitur Aplikasi
+- CRUD Notes (Create, Read, Update, Delete)
+- Menyimpan Catatan ke **Firestore Database**
+- Edit dan Save Note dengan snackbar notifikasi
+- Validate form untuk title dan content
+- Auto refresh list setelah note berhasil disimpan
+- Optional: Pin & Timestamp
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Teknologi yang digunakan
+| Teknologi | Deskripsi |
+|----------|-----------|
+| Flutter | Framework UI Cross Platform |
+| Dart | Bahasa pemrograman |
+| Firebase Firestore | Cloud database |
+| Firebase Core | Integrasi firebase |
+| State Management (setState) | Stateful update |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📂 Project Structure
+
