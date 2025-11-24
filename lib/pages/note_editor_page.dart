@@ -6,7 +6,7 @@ class NoteEditorPage extends StatefulWidget {
   // ignore: use_super_parameters
   const NoteEditorPage({Key? key, this.note}) : super(key: key);
   
-  final Welcome? note;
+  final NoteModel? note;
 
   @override
   State<NoteEditorPage> createState() => _NoteEditorPageState();
@@ -37,8 +37,8 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
   Future<void> _saveNote() async {
     if (_formKey.currentState!.validate()) {
       try {
-        final title = _titleController.text;
-        final content = _contentController.text;
+        final title = _titleController.text.trim();
+        final content = _contentController.text.trim();
         final now = DateTime.now().toIso8601String();
 
         final noteData = {
@@ -46,11 +46,11 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
           'content': content,
           'created_at': widget.note?.createdAt ?? now,
           'updated_at': now,
-          'pinned': (widget.note?.pinned ?? false) ? 1 : 0,
+          'pinned': widget.note?.pinned ?? 0,
         };
 
         if (widget.note != null && widget.note!.noteId != null) {
-          noteData['note_id'] = widget.note!.noteId;
+          noteData['note_id'] = widget.note!.noteId!;
           await dbHelper.updateNote(noteData);
         } else {
           await dbHelper.insertItem(noteData);
@@ -67,7 +67,9 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
           ),
         );
 
+        // ---- KEMBALIKAN RESULT TRUE UNTUK REFRESH LIST ----
         Navigator.pop(context, true);
+
       } catch (e) {
         if (!mounted) return;
         

@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+NoteModel welcomeFromJson(String str) => NoteModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(NoteModel data) => json.encode(data.toJson());
 
-class Welcome {
-  dynamic noteId;
+class NoteModel {
+  String? noteId;
   String title;
   String content;
   String createdAt;
   String updatedAt;
-  bool pinned;
+  int pinned; // <-- harus int, bukan bool
 
-  Welcome({
-    required this.noteId,
+  NoteModel({
+    this.noteId,
     required this.title,
     required this.content,
     required this.createdAt,
@@ -21,21 +21,25 @@ class Welcome {
     required this.pinned,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-    noteId: json["note_id"],
-    title: json["title"],
-    content: json["content"] ?? "",
-    createdAt: json["created_at"] ?? "",
-    updatedAt: json["updated_at"] ?? "",
-    pinned: json["pinned"] == 1 || json["pinned"] == true ? true : false,
-  );
+  factory NoteModel.fromJson(Map<String, dynamic> json) {
+    return NoteModel(
+      noteId: json['noteId'],
+      title: json['title'],
+      content: json['content'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
+      pinned: json['pinned'] ?? 0,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "note_id": noteId,
-    "title": title,
-    "content": content,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-    "pinned": pinned,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'noteId': noteId,
+      'title': title,
+      'content': content,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'pinned': pinned,
+    };
+  }
 }
